@@ -1,18 +1,18 @@
 const pool = require('../../database/postgres/pool');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
-const AuthServerTestHelper=require('../../../../tests/AuthServerTestHelper')
+const AuthServerTestHelper = require('../../../../tests/AuthServerTestHelper');
 const container = require('../../container');
 const createServer = require('../createServer');
 
 describe('/threads endpoint', () => {
-  afterAll(async () => {
-    await pool.end();
-  });
-
   afterEach(async () => {
     await UsersTableTestHelper.cleanTable();
     await ThreadsTableTestHelper.cleanTable();
+  });
+  
+  afterAll(async () => {
+    await pool.end();
   });
 
   describe('when POST /threads', () => {
@@ -24,7 +24,8 @@ describe('/threads endpoint', () => {
       };
       const server = await createServer(container);
 
-      const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
 
       // Action
       const response = await server.inject({
@@ -42,81 +43,81 @@ describe('/threads endpoint', () => {
       expect(responseJson.status).toEqual('success');
       expect(responseJson.data.addedThread).toBeDefined();
     });
-    
-  //   it('should response 401 when request missing authentication', async () => {
-  //     // Arrange
-  //     const requestPayload = {
-  //       title: 'Mendapatkan benih beras',
-  //       body: 'Silahkan pergi ke toko Sam dari pukul 09:00 sampai 16:00',
-  //     };
-  //     const server = await createServer(container);
 
-  //     // Action
-  //     const response = await server.inject({
-  //       method: 'POST',
-  //       url: '/threads',
-  //       payload: requestPayload,
-  //     });
+      it('should response 401 when request missing authentication', async () => {
+        // Arrange
+        const requestPayload = {
+          title: 'Mendapatkan benih beras',
+          body: 'Silahkan pergi ke toko Sam dari pukul 09:00 sampai 16:00',
+        };
+        const server = await createServer(container);
 
-  //     // Assert
-  //     const responseJson = JSON.parse(response.payload);
-  //     expect(response.statusCode).toEqual(401);
-  //     expect(responseJson.error).toEqual('Unauthorized');
-  //     expect(responseJson.message).toEqual('Missing authentication');
-  //   });
+        // Action
+        const response = await server.inject({
+          method: 'POST',
+          url: '/threads',
+          payload: requestPayload,
+        });
 
-  //   it('should response 400 when request payload not contain needed property', async () => {
-  //     // Arrange
-  //     const requestPayload = {
-  //       title: 'Mendapatkan benih beras',
-  //     };
-  //     const server = await createServer(container);
+        // Assert
+        const responseJson = JSON.parse(response.payload);
+        expect(response.statusCode).toEqual(401);
+        expect(responseJson.error).toEqual('Unauthorized');
+        expect(responseJson.message).toEqual('Missing authentication');
+      });
 
-  //     const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      it('should response 400 when request payload not contain needed property', async () => {
+        // Arrange
+        const requestPayload = {
+          title: 'Mendapatkan benih beras',
+        };
+        const server = await createServer(container);
 
-  //     // Action
-  //     const response = await server.inject({
-  //       method: 'POST',
-  //       url: '/threads',
-  //       payload: requestPayload,
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
+        const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
 
-  //     // Assert
-  //     const responseJson = JSON.parse(response.payload);
-  //     expect(response.statusCode).toEqual(400);
-  //     expect(responseJson.status).toEqual('fail');
-  //     expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena properti yang dibutuhkan tidak ada');
-  //   });
+        // Action
+        const response = await server.inject({
+          method: 'POST',
+          url: '/threads',
+          payload: requestPayload,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
 
-  //   it('should response 400 when request payload not meet data type specification', async () => {
-  //     // Arrange
-  //     const requestPayload = {
-  //       title: 'Mendapatkan benih beras',
-  //       body: true,
-  //     };
-  //     const server = await createServer(container);
+        // Assert
+        const responseJson = JSON.parse(response.payload);
+        expect(response.statusCode).toEqual(400);
+        expect(responseJson.status).toEqual('fail');
+        expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena properti yang dibutuhkan tidak ada');
+      });
 
-  //     const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      it('should response 400 when request payload not meet data type specification', async () => {
+        // Arrange
+        const requestPayload = {
+          title: 'Mendapatkan benih beras',
+          body: true,
+        };
+        const server = await createServer(container);
 
-  //     // Action
-  //     const response = await server.inject({
-  //       method: 'POST',
-  //       url: '/threads',
-  //       payload: requestPayload,
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
+        const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
 
-  //     // Assert
-  //     const responseJson = JSON.parse(response.payload);
-  //     expect(response.statusCode).toEqual(400);
-  //     expect(responseJson.status).toEqual('fail');
-  //     expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena tipe data tidak sesuai');
-  //   });
+        // Action
+        const response = await server.inject({
+          method: 'POST',
+          url: '/threads',
+          payload: requestPayload,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        // Assert
+        const responseJson = JSON.parse(response.payload);
+        expect(response.statusCode).toEqual(400);
+        expect(responseJson.status).toEqual('fail');
+        expect(responseJson.message).toEqual('tidak dapat membuat thread baru karena tipe data tidak sesuai');
+      });
   });
 
   // describe('when GET /threads', () => {

@@ -8,7 +8,7 @@ exports.up = pgm => {
       type:'VARCHAR(50)',
       primaryKey:true
     },
-    comment:{
+    content:{
       type:'TEXT',
       notNull:true,
     },

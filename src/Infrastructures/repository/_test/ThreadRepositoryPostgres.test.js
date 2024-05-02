@@ -64,7 +64,28 @@ describe('ThreadRepository postgres', () => {
     });
   });
 
- 
+  describe('verifyThreadAvailability function', () => {
+    it('should throw NotFoundError when thread not found', async () => {
+      // Arrange
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+
+      // Action & Assert
+      await expect(threadRepositoryPostgres.verifyThreadAvailability('thread-123')).rejects.toThrowError(NotFoundError);
+    });
+
+    it('should not throw NotFoundError when thread found', async () => {
+      // Arrange
+      await UsersTableTestHelper.addUser({});
+      await ThreadTableTestHelper.addThread({
+        id: 'thread-234',
+      });
+
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+
+      // Action & Arrange
+      await expect(threadRepositoryPostgres.verifyThreadAvailability('thread-234')).resolves.not.toThrowError(NotFoundError);
+    });
+  });
 
   describe('getThreadById function', () => {
     it('should throw NotFoundError when thread not found', async () => {
