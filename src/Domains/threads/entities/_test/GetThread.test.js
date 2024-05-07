@@ -1,51 +1,51 @@
-const Thread = require('../Thread');
+const GetThread = require('../GetThread');
 
 describe('a GetThread entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     // Arrange
     const payload = {
       id: 'thread-123',
-      title: 'Mendapatkan benih beras',
+      title: 'Sebuah thread',
     };
 
     // Action & Assert
-    expect(() => new Thread(payload)).toThrowError('THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+    expect(() => new GetThread(payload)).toThrowError('THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
   });
 
   it('should throw error when payload did not meet data type specification', () => {
     // Arrange
     const payload = {
-      id: 123,
-      title: 'Mendapatkan benih beras',
+      id: 'thread-123',
+      title: 'Sebuah thread',
       body: [],
-      date: 123,
+      createdAt: 123,
       username: 123,
-      comments: [],
+      comments: 345,
     };
 
     // Action & Assert
-    expect(() => new Thread(payload)).toThrowError('THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    expect(() => new GetThread(payload)).toThrowError('THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
   });
 
   it('should create thread object correctly', () => {
     // Arrange
     const payload = {
       id: 'thread-234',
-      title: 'Mendapatkan benih beras',
-      body: 'Lorem ipsum',
-      date: '2020-01-01T00:00:00.000Z',
+      title: 'Sebuah thread',
+      body: 'Sebuah body thread',
+      createdAt: '2024-05-02T16:41:15.377Z',
       username: 'dicoding',
       comments: [],
     };
 
     // Action
-    const thread = new Thread(payload);
+    const thread = new GetThread(payload);
 
     // Assert
     expect(thread.id).toEqual(payload.id);
     expect(thread.title).toEqual(payload.title);
     expect(thread.body).toEqual(payload.body);
-    expect(thread.date).toEqual(payload.date);
+    expect(thread.createdAt).toEqual(payload.createdAt);
     expect(thread.username).toEqual(payload.username);
     expect(thread.comments).toEqual(payload.comments);
     expect(Array.isArray(thread.comments)).toBe(true);
