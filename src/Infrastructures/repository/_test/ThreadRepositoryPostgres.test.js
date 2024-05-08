@@ -103,8 +103,8 @@ describe('ThreadRepository postgres', () => {
         id: 'thread-123',
         title: 'sebuah thread',
         body: 'sebuah thread body',
+        date: '2024-04-06T08:55:00.000Z',
         owner: 'user-123',
-        created_at: '2024-04-06T08:55:00.000Z',
       };
       await ThreadTableTestHelper.addThread(thread);
 
@@ -113,7 +113,7 @@ describe('ThreadRepository postgres', () => {
         title: 'sebuah thread',
         body: 'sebuah thread body',
         username: 'dicoding',
-        created_at: '2024-04-06T08:55:00.000Z',
+        date: '2024-04-06T08:55:00.000Z',
       };
 
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});

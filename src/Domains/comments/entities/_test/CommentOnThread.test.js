@@ -5,7 +5,7 @@ describe('a CommentOnThread entities', () => {
     const payload = {
       id: 'comment-123',
       username:'John Doe',
-      // createdAt:'2024-05-03T09:23:50.928Z',
+      // date:'2024-05-03T09:23:50.928Z',
       content: 'sebuah komen',
     };
 
@@ -18,7 +18,7 @@ describe('a CommentOnThread entities', () => {
     const payload = {
       id: 123,
       username: 'John Doe',
-      createdAt: [],
+      date: [],
       content: 345,
     };
 
@@ -31,16 +31,16 @@ describe('a CommentOnThread entities', () => {
     const payload = {
       id:'user-234',
       username:'John Doe',
-      createdAt:'2024-05-03T09:23:50.928Z',
+      date:'2024-05-03T09:23:50.928Z',
       content:'sebuah komen',
       isDelete: false,
     }
 
-    const {id, username, createdAt, content}=new CommentOnThread(payload)
+    const {id, username, date, content}=new CommentOnThread(payload)
 
     expect(id).toEqual(payload.id)
     expect(username).toEqual(payload.username)
-    expect(createdAt).toEqual(payload.createdAt)
+    expect(date).toEqual(payload.date)
     expect(content).toEqual(payload.content)
   })
 
@@ -49,18 +49,18 @@ describe('a CommentOnThread entities', () => {
     const payload = {
       id: 'comment-123',
       username: 'dicoding',
-      createdAt: '2024-05-06T08:13:09.755Z',
+      date: '2024-05-06T08:13:09.755Z',
       content: 'sebuah komen',
       isDelete: true,
     };
 
     // Action
-    const {id, username, createdAt, content} = new CommentOnThread(payload);
+    const {id, username, date, content} = new CommentOnThread(payload);
 
     // Assert
     expect(id).toEqual(payload.id);
     expect(username).toEqual(payload.username);
-    expect(createdAt).toEqual(payload.createdAt);
+    expect(date).toEqual(payload.date);
     expect(content).toEqual('**komentar telah dihapus**');
   });
 });

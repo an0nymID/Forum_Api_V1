@@ -3,21 +3,21 @@ class GetThread {
     this._verifyPayload(payload);
 
     const {
-      id, title, body, createdAt, username, comments,
+      id, title, body, date, username, comments,
     } = payload;
 
     this.id = id;
     this.title = title;
     this.body = body;
-    this.createdAt = createdAt;
+    this.date = date;
     this.username = username;
     this.comments = comments;
   }
 
   _verifyPayload({
-    id, title, body, createdAt, username, comments,
+    id, title, body, date, username, comments,
   }) {
-    if (!id || !title || !body || !createdAt || !username || !comments) {
+    if (!id || !title || !body || !date || !username || !comments) {
       throw new Error('THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
@@ -25,7 +25,7 @@ class GetThread {
       typeof id !== 'string'
       || typeof title !== 'string'
       || typeof body !== 'string'
-      || typeof createdAt !== 'string'
+      || typeof date !== 'string'
       || typeof username !== 'string'
       || !Array.isArray(comments)
     ) {

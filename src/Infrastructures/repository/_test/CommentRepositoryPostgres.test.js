@@ -153,7 +153,7 @@ describe('CommentRepository postgres', () => {
       const firstComment = {
         id: 'comment-123',
         content: 'sebuah komen pertama',
-        createdAt: '2024-05-06T08:13:09.755Z',
+        date: '2024-05-06T08:13:09.755Z',
         threadId: 'thread-123',
         owner: 'user-123',
         isDelete: false,
@@ -161,7 +161,7 @@ describe('CommentRepository postgres', () => {
       const secondComment = {
         id: 'comment-234',
         content: 'second comment',
-        createdAt: '2024-06-06T08:13:09.755Z',
+        date: '2024-06-06T08:13:09.755Z',
         threadId: 'thread-123',
         owner: 'user-123',
         isDelete: false,

@@ -17,7 +17,7 @@ describe('GetThreadDetailUseCase', () => {
       id: 'thread-123',
       title: 'sebuah thread',
       body: 'sebuah body thread',
-      createdAt: '2024-05-08T14:37:42.575Z',
+      date: '2024-05-08T14:37:42.575Z',
       username: 'dicoding',
       comments: [],
     });
@@ -26,7 +26,7 @@ describe('GetThreadDetailUseCase', () => {
       new CommentOnThread({
         id: 'comment-123',
         content: 'sebuah komen pertama',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: true,
         username: 'dicoding',
       }),
@@ -34,7 +34,7 @@ describe('GetThreadDetailUseCase', () => {
       new CommentOnThread({
         id: 'comment-234',
         content: 'sebuah komen kedua',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: false,
         username: 'dicoding',
       }),
@@ -44,7 +44,7 @@ describe('GetThreadDetailUseCase', () => {
       new ReplyOnComment({
         id: 'reply-123',
         content: 'sebuah balasan pertama',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: false,
         commentId: 'comment-123',
         username: 'dicoding',
@@ -53,7 +53,7 @@ describe('GetThreadDetailUseCase', () => {
       new ReplyOnComment({
         id: 'reply-234',
         content: 'sebuah balasan kedua',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: true,
         commentId: 'comment-234',
         username: 'dicoding',
@@ -128,7 +128,7 @@ describe('GetThreadDetailUseCase', () => {
       new CommentOnThread({
         id: 'comment-123',
         content: 'sebuah komen pertama',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: true,
         username: 'dicoding',
       }),
@@ -136,7 +136,7 @@ describe('GetThreadDetailUseCase', () => {
       new CommentOnThread({
         id: 'comment-234',
         content: 'Ini comment kedua',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: false,
         username: 'dicoding',
       }),
@@ -172,14 +172,14 @@ describe('GetThreadDetailUseCase', () => {
       {
         id: 'comment-123',
         content: '**komentar telah dihapus**',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         username: 'dicoding',
         replies: [],
       },
       {
         id: 'comment-234',
         content: 'Ini comment kedua',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         username: 'dicoding',
         replies: [],
       },
@@ -188,7 +188,7 @@ describe('GetThreadDetailUseCase', () => {
       new ReplyOnComment({
         id: 'reply-123',
         content: 'sebuah balasan pertama',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: false,
         commentId: 'comment-123',
         username: 'dicoding',
@@ -197,7 +197,7 @@ describe('GetThreadDetailUseCase', () => {
       new ReplyOnComment({
         id: 'reply-234',
         content: 'Ini reply kedua',
-        createdAt: '2024-05-08T14:37:42.575Z',
+        date: '2024-05-08T14:37:42.575Z',
         isDelete: true,
         commentId: 'comment-234',
         username: 'dicoding',

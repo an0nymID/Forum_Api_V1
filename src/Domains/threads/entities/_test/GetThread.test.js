@@ -18,7 +18,7 @@ describe('a GetThread entities', () => {
       id: 'thread-123',
       title: 'Sebuah thread',
       body: [],
-      createdAt: 123,
+      date: 123,
       username: 123,
       comments: 345,
     };
@@ -33,7 +33,7 @@ describe('a GetThread entities', () => {
       id: 'thread-234',
       title: 'Sebuah thread',
       body: 'Sebuah body thread',
-      createdAt: '2024-05-02T16:41:15.377Z',
+      date: '2024-05-02T16:41:15.377Z',
       username: 'dicoding',
       comments: [],
     };
@@ -45,7 +45,7 @@ describe('a GetThread entities', () => {
     expect(thread.id).toEqual(payload.id);
     expect(thread.title).toEqual(payload.title);
     expect(thread.body).toEqual(payload.body);
-    expect(thread.createdAt).toEqual(payload.createdAt);
+    expect(thread.date).toEqual(payload.date);
     expect(thread.username).toEqual(payload.username);
     expect(thread.comments).toEqual(payload.comments);
     expect(Array.isArray(thread.comments)).toBe(true);

@@ -199,7 +199,7 @@ describe('ReplyRepository postgres', () => {
         {
           id: 'reply-123',
           content: 'sebuah balasan',
-          createdAt: '2024-05-08T06:28:34.562Z',
+          date: '2024-05-08T06:28:34.562Z',
           commentId: 'comment-123',
           username: 'dicoding',
         },

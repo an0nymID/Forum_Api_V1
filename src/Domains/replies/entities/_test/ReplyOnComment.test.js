@@ -17,7 +17,7 @@ describe('a Reply entities', () => {
     const payload = {
       id: 'reply-123',
       content: 'sebuah reply',
-      createdAt: [],
+      date: [],
       isDelete: false,
       commentId: 123,
       username: 345,
@@ -32,7 +32,7 @@ describe('a Reply entities', () => {
     const payload = {
       id: 'reply-123',
       content: 'sebuah reply',
-      createdAt: '2024-05-08T14:37:42.575Z',
+      date: '2024-05-08T14:37:42.575Z',
       isDelete: false,
       commentId: 'comment-123',
       username: 'dicoding',
@@ -44,7 +44,7 @@ describe('a Reply entities', () => {
     // Assert
     expect(reply.id).toEqual(payload.id);
     expect(reply.content).toEqual(payload.content);
-    expect(reply.createdAt).toEqual(payload.createdAt);
+    expect(reply.date).toEqual(payload.date);
     expect(reply.commentId).toEqual(payload.commentId);
     expect(reply.username).toEqual(payload.username);
   });
@@ -54,7 +54,7 @@ describe('a Reply entities', () => {
     const payload = {
       id: 'reply-123',
       content: 'sebuah reply',
-      createdAt: '2024-05-08T14:37:42.575Z',
+      date: '2024-05-08T14:37:42.575Z',
       isDelete: true,
       commentId: 'comment-123',
       username: 'dicoding',
@@ -66,7 +66,7 @@ describe('a Reply entities', () => {
     // Assert
     expect(reply.id).toEqual(payload.id);
     expect(reply.content).toEqual('**balasan telah dihapus**');
-    expect(reply.createdAt).toEqual(payload.createdAt);
+    expect(reply.date).toEqual(payload.date);
     expect(reply.commentId).toEqual(payload.commentId);
     expect(reply.username).toEqual(payload.username);
   });

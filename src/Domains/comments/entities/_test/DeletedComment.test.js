@@ -19,7 +19,7 @@ describe('a DeletedComment entities', () => {
     const payload = {
       id: 'comment-123',
       userName: 'user-123',
-      createdAt: '2024-05-04T09:27:51.157Z',
+      date: '2024-05-04T09:27:51.157Z',
       content: 'sebuah comment',
       isDelete: false,
     };
@@ -35,7 +35,7 @@ describe('a DeletedComment entities', () => {
     const payload = {
       id: 'comment-123',
       userName: 'user-123',
-      createdAt: [],
+      date: [],
       content: {},
       isDelete: 'true',
     };
@@ -51,7 +51,7 @@ describe('a DeletedComment entities', () => {
     const payload = {
       id: 'comment-123',
       userName: 'user-123',
-      createdAt: '2024-05-04T09:27:51.157Z',
+      date: '2024-05-04T09:27:51.157Z',
       content: 'sebuah comment',
       isDelete: true,
     };
@@ -62,7 +62,7 @@ describe('a DeletedComment entities', () => {
     // Assert
     expect(deletedComment.id).toEqual(payload.id);
     expect(deletedComment.userName).toEqual(payload.userName);
-    expect(deletedComment.createdAt).toEqual(payload.createdAt);
+    expect(deletedComment.date).toEqual(payload.date);
     expect(deletedComment.content).toEqual(payload.content);
     expect(deletedComment.isDelete).toEqual(payload.isDelete);
   });
