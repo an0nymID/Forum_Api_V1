@@ -4,6 +4,8 @@ describe('a CommentOnThread entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     const payload = {
       id: 'comment-123',
+      username:'John Doe',
+      // createdAt:'2024-05-03T09:23:50.928Z',
       content: 'sebuah komen',
     };
 

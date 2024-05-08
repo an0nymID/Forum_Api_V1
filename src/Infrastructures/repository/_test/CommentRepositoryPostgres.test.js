@@ -147,39 +147,39 @@ describe('CommentRepository postgres', () => {
     });
   });
 
-  // describe('getCommentsByThreadId function', () => {
-  //   it('should return comments correctly', async () => {
-  //     // Arrange
-  //     const firstComment = {
-  //       id: 'comment-123',
-  //       content: 'first comment',
-  //       createdAt: '2024-05-06T08:13:09.755Z',
-  //       threadId: 'thread-123',
-  //       owner: 'user-123',
-  //       isDelete: false,
-  //     };
-  //     const secondComment = {
-  //       id: 'comment-234',
-  //       content: 'second comment',
-  //       createdAt: '2023-12-26T09:20:00.000Z',
-  //       threadId: 'thread-123',
-  //       owner: 'user-123',
-  //       isDelete: false,
-  //     };
-  //     await CommentsTableTestHelper.addComment(firstComment);
-  //     await CommentsTableTestHelper.addComment(secondComment);
-  //     const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+  describe('getCommentsByThreadId function', () => {
+    it('should return comments correctly', async () => {
+      // Arrange
+      const firstComment = {
+        id: 'comment-123',
+        content: 'sebuah komen pertama',
+        createdAt: '2024-05-06T08:13:09.755Z',
+        threadId: 'thread-123',
+        owner: 'user-123',
+        isDelete: false,
+      };
+      const secondComment = {
+        id: 'comment-234',
+        content: 'second comment',
+        createdAt: '2024-06-06T08:13:09.755Z',
+        threadId: 'thread-123',
+        owner: 'user-123',
+        isDelete: false,
+      };
+      await CommentsTableTestHelper.addComment(firstComment);
+      await CommentsTableTestHelper.addComment(secondComment);
+      const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
 
-  //     // Action
-  //     const comments = await commentRepositoryPostgres.getCommentsByThreadId('thread-123');
+      // Action
+      const comments = await commentRepositoryPostgres.getCommentsByThreadId('thread-123');
 
-  //     // Assert
-  //     expect(comments).toEqual([
-  //       new CommentOnThread({ ...firstComment, username: 'dicoding' }),
-  //       new CommentOnThread({ ...secondComment, username: 'dicoding' }),
-  //     ]);
-  //   });
-  // });
+      // Assert
+      expect(comments).toEqual([
+        new CommentOnThread({ ...firstComment, username: 'dicoding' }),
+        new CommentOnThread({ ...secondComment, username: 'dicoding' }),
+      ]);
+    });
+  });
 
 
 });

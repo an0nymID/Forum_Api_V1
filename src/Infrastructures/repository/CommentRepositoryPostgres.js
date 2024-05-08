@@ -64,22 +64,21 @@ class CommentRepositoryPostgres extends CommentRepository {
     }
   }
 
-  // async getCommentsByThreadId(threadId) {
-  //   const query = {
-  //     text: `SELECT 
-  //           comments.id, comments.content, comments.created_at, 
-  //           users.username, comments.is_delete
-  //           FROM comments INNER JOIN users ON comments.owner = users.id
-  //           WHERE comments.thread_id = $1 ORDER BY comments.created_at ASC`,
-  //     values: [threadId],
-  //   };
+  async getCommentsByThreadId(threadId) {
+    const query = {
+      text: `SELECT 
+            comments.id, comments.content, comments.created_at, comments.is_delete, users.username
+            FROM comments INNER JOIN users ON (comments.owner = users.id)
+            WHERE comments.thread_id = $1 ORDER BY created_at`,
+      values: [threadId],
+    };
 
-  //   const result = await this._pool.query(query);
+    const result = await this._pool.query(query);
 
-  //   return result.rows.map((cm) => new CommentOnThread({
-  //     ...cm, isDelete: cm.is_delete,
-  //   }));
-  // }
+    return result.rows.map((item) => new CommentOnThread({
+      ...item, createdAt:item.created_at, isDelete: item.is_delete,
+    }));
+  }
 
 }
 

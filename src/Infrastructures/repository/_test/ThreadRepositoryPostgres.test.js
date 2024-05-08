@@ -93,7 +93,7 @@ describe('ThreadRepository postgres', () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
 
       // Action & Assert
-      await expect(threadRepositoryPostgres.getThreadById('thread-123')).rejects.toThrowError(NotFoundError);
+      await expect(threadRepositoryPostgres.getThread('thread-123')).rejects.toThrowError(NotFoundError);
     });
 
     it('should return thread correctly', async () => {
@@ -101,8 +101,8 @@ describe('ThreadRepository postgres', () => {
       await UsersTableTestHelper.addUser({});
       const thread = {
         id: 'thread-123',
-        title: 'Mendapatkan benih beras',
-        body: 'Silahkan pergi ke toko Sam dari pukul 09:00 sampai 16:00',
+        title: 'sebuah thread',
+        body: 'sebuah thread body',
         owner: 'user-123',
         created_at: '2024-04-06T08:55:00.000Z',
       };
@@ -110,8 +110,8 @@ describe('ThreadRepository postgres', () => {
 
       const threadDetail = {
         id: 'thread-123',
-        title: 'Mendapatkan benih beras',
-        body: 'Silahkan pergi ke toko Sam dari pukul 09:00 sampai 16:00',
+        title: 'sebuah thread',
+        body: 'sebuah thread body',
         username: 'dicoding',
         created_at: '2024-04-06T08:55:00.000Z',
       };
@@ -119,7 +119,7 @@ describe('ThreadRepository postgres', () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
 
       // Action
-      const result = await threadRepositoryPostgres.getThreadById('thread-123');
+      const result = await threadRepositoryPostgres.getThread('thread-123');
 
       // Assert
       expect(result).toStrictEqual(threadDetail);
