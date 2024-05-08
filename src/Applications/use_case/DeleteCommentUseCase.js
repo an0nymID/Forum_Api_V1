@@ -10,15 +10,15 @@ class DeleteCommentUseCase {
     const deleteComment = new DeleteComment(useCasePayload);
 
     await this._threadRepository.verifyThreadAvailability(
-      deleteComment.threadId
+      deleteComment.threadId,
     );
     await this._commentRepository.verifyCommentAvailability(
       deleteComment.id,
-      deleteComment.threadId
+      deleteComment.threadId,
     );
     await this._commentRepository.verifyCommentOwner(
       deleteComment.id,
-      deleteComment.owner
+      deleteComment.owner,
     );
     return this._commentRepository.deleteCommentById(deleteComment.id);
   }

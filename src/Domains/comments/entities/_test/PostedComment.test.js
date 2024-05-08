@@ -5,14 +5,14 @@ describe('a PostedComment entities', () => {
     // Arrange
     const payload = {
       content: 'sebuah comment',
-      owner:'user-123'
+      owner: 'user-123',
     };
 
     // Action & Assert
     expect(() => new PostedComment(payload)).toThrowError(
-      'POSTED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
+      'POSTED_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY',
     );
-  })
+  });
 
   it('should throw error when payload did not meet data type specification', () => {
     // Arrange
@@ -23,7 +23,9 @@ describe('a PostedComment entities', () => {
     };
 
     // Action & Assert
-    expect(() => new PostedComment(payload)).toThrowError('POSTED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    expect(() => new PostedComment(payload)).toThrowError(
+      'POSTED_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION',
+    );
   });
 
   it('should create postedComment object correctly', () => {
@@ -42,4 +44,4 @@ describe('a PostedComment entities', () => {
     expect(postedComment.content).toEqual(payload.content);
     expect(postedComment.owner).toEqual(payload.owner);
   });
-})
+});

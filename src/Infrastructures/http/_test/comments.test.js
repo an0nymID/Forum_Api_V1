@@ -27,11 +27,14 @@ describe('/threads/{threadId}/comments endpoint', () => {
       };
       const server = await createServer(container);
 
-      const { accessToken, credentialId } = await AuthServerTestHelper
-        .getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -56,10 +59,14 @@ describe('/threads/{threadId}/comments endpoint', () => {
         content: 'sebuah komen',
       };
       const server = await createServer(container);
-      const { credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -81,10 +88,14 @@ describe('/threads/{threadId}/comments endpoint', () => {
         content: 'Komentar baru',
       };
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -107,10 +118,14 @@ describe('/threads/{threadId}/comments endpoint', () => {
       // Arrange
       const requestPayload = {};
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -126,7 +141,9 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada');
+      expect(responseJson.message).toEqual(
+        'tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada',
+      );
     });
 
     it('should response 400 when request payload not meet data type specification', async () => {
@@ -135,10 +152,14 @@ describe('/threads/{threadId}/comments endpoint', () => {
         content: [],
       };
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -154,7 +175,9 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('tidak dapat membuat komentar baru karena tipe data tidak sesuai');
+      expect(responseJson.message).toEqual(
+        'tidak dapat membuat komentar baru karena tipe data tidak sesuai',
+      );
     });
   });
 
@@ -162,12 +185,20 @@ describe('/threads/{threadId}/comments endpoint', () => {
     it('should response 200 and delete comment', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -187,12 +218,20 @@ describe('/threads/{threadId}/comments endpoint', () => {
     it('should response 401 when request missing authentication', async () => {
       // Arrange
       const server = await createServer(container);
-      const { credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-234';
       const commentId = 'comment-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -210,12 +249,20 @@ describe('/threads/{threadId}/comments endpoint', () => {
     it('should response 404 when thread not found', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId:threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId: threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -236,12 +283,20 @@ describe('/threads/{threadId}/comments endpoint', () => {
     it('should response 404 when comment not found', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-234';
       const commentId = 'comment-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -262,14 +317,25 @@ describe('/threads/{threadId}/comments endpoint', () => {
     it('should response 403 when user not owner', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-234';
       const commentId = 'comment-123';
       const otherUserId = 'user-234';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await UsersTableTestHelper.addUser({ id: otherUserId, username: 'otherUser' });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: otherUserId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await UsersTableTestHelper.addUser({
+        id: otherUserId,
+        username: 'otherUser',
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: otherUserId,
+      });
 
       // Action
       const response = await server.inject({
@@ -284,8 +350,9 @@ describe('/threads/{threadId}/comments endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(403);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('Anda tidak boleh mengakses resource ini');
+      expect(responseJson.message).toEqual(
+        'Anda tidak boleh mengakses resource ini',
+      );
     });
   });
-
 });

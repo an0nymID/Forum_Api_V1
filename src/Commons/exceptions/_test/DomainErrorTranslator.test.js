@@ -5,57 +5,57 @@ describe('DomainErrorTranslator', () => {
   it('should translate error correctly', () => {
     expect(
       DomainErrorTranslator.translate(
-        new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY')
-      )
+        new Error('REGISTER_USER.NOT_CONTAIN_NEEDED_PROPERTY'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat user baru karena properti yang dibutuhkan tidak ada'
-      )
+        'tidak dapat membuat user baru karena properti yang dibutuhkan tidak ada',
+      ),
     );
     expect(
       DomainErrorTranslator.translate(
-        new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION')
-      )
+        new Error('REGISTER_USER.NOT_MEET_DATA_TYPE_SPECIFICATION'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat user baru karena tipe data tidak sesuai'
-      )
+        'tidak dapat membuat user baru karena tipe data tidak sesuai',
+      ),
     );
     expect(
       DomainErrorTranslator.translate(
-        new Error('REGISTER_USER.USERNAME_LIMIT_CHAR')
-      )
+        new Error('REGISTER_USER.USERNAME_LIMIT_CHAR'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat user baru karena karakter username melebihi batas limit'
-      )
+        'tidak dapat membuat user baru karena karakter username melebihi batas limit',
+      ),
     );
     expect(
       DomainErrorTranslator.translate(
-        new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER')
-      )
+        new Error('REGISTER_USER.USERNAME_CONTAIN_RESTRICTED_CHARACTER'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat user baru karena username mengandung karakter terlarang'
-      )
+        'tidak dapat membuat user baru karena username mengandung karakter terlarang',
+      ),
     );
     expect(
       DomainErrorTranslator.translate(
-        new Error('POST_REPLY.NOT_CONTAIN_NEEDED_PROPERTY')
-      )
+        new Error('POST_REPLY.NOT_CONTAIN_NEEDED_PROPERTY'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada'
-      )
+        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada',
+      ),
     );
     expect(
       DomainErrorTranslator.translate(
-        new Error('POST_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION')
-      )
+        new Error('POST_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION'),
+      ),
     ).toStrictEqual(
       new InvariantError(
-        'tidak dapat membuat balasan baru karena tipe data tidak sesuai'
-      )
+        'tidak dapat membuat balasan baru karena tipe data tidak sesuai',
+      ),
     );
   });
 

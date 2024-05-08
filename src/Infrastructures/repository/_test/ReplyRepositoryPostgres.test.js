@@ -50,7 +50,7 @@ describe('ReplyRepository postgres', () => {
       const fakeIdGenerator = () => '123';
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
@@ -63,7 +63,7 @@ describe('ReplyRepository postgres', () => {
           id: 'reply-123',
           content: 'Sebuah balasan',
           owner: 'user-123',
-        })
+        }),
       );
       expect(replies).toHaveLength(1);
     });
@@ -79,7 +79,7 @@ describe('ReplyRepository postgres', () => {
       const fakeIdGenerator = () => '123';
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(
         pool,
-        fakeIdGenerator
+        fakeIdGenerator,
       );
 
       // Action
@@ -91,7 +91,7 @@ describe('ReplyRepository postgres', () => {
           id: 'reply-123',
           content: 'Sebuah balasan',
           owner: 'user-123',
-        })
+        }),
       );
     });
   });
@@ -106,8 +106,8 @@ describe('ReplyRepository postgres', () => {
         replyRepositoryPostgres.verifyReplyAvailability(
           'reply-123',
           'comment-123',
-          'thread-123'
-        )
+          'thread-123',
+        ),
       ).rejects.toThrowError(NotFoundError);
     });
 
@@ -123,8 +123,8 @@ describe('ReplyRepository postgres', () => {
         replyRepositoryPostgres.verifyReplyAvailability(
           'reply-123',
           'comment-123',
-          'thread-123'
-        )
+          'thread-123',
+        ),
       ).resolves.not.toThrowError(NotFoundError);
     });
   });
@@ -140,7 +140,7 @@ describe('ReplyRepository postgres', () => {
 
       // Action & Assert
       await expect(
-        replyRepositoryPostgres.verifyReplyOwner('reply-123', 'user-234')
+        replyRepositoryPostgres.verifyReplyOwner('reply-123', 'user-234'),
       ).rejects.toThrowError(AuthorizationError);
     });
 
@@ -154,7 +154,7 @@ describe('ReplyRepository postgres', () => {
 
       // Action & Assert
       await expect(
-        replyRepositoryPostgres.verifyReplyOwner('reply-123', 'user-123')
+        replyRepositoryPostgres.verifyReplyOwner('reply-123', 'user-123'),
       ).resolves.not.toThrowError(AuthorizationError);
     });
   });
@@ -166,7 +166,7 @@ describe('ReplyRepository postgres', () => {
 
       // Action & Assert
       await expect(
-        replyRepositoryPostgres.deleteReplyById('reply-123')
+        replyRepositoryPostgres.deleteReplyById('reply-123'),
       ).rejects.toThrowError(NotFoundError);
     });
 
@@ -208,7 +208,9 @@ describe('ReplyRepository postgres', () => {
       const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {});
 
       // Action
-      const replies = await replyRepositoryPostgres.getRepliesByThreadId('thread-123');
+      const replies = await replyRepositoryPostgres.getRepliesByThreadId(
+        'thread-123',
+      );
 
       // Assert
       expect(replies).toEqual(detailReplies);

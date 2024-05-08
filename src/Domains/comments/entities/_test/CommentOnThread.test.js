@@ -4,13 +4,13 @@ describe('a CommentOnThread entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     const payload = {
       id: 'comment-123',
-      username:'John Doe',
+      username: 'John Doe',
       // date:'2024-05-03T09:23:50.928Z',
       content: 'sebuah komen',
     };
 
     expect(() => new CommentOnThread(payload)).toThrowError(
-      'COMMENT_ON_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'
+      'COMMENT_ON_THREAD.NOT_CONTAIN_NEEDED_PROPERTY',
     );
   });
 
@@ -23,26 +23,28 @@ describe('a CommentOnThread entities', () => {
     };
 
     expect(() => new CommentOnThread(payload)).toThrowError(
-      'COMMENT_ON_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'
+      'COMMENT_ON_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 
-  it('should create CommentOnThread object correctly',()=>{
+  it('should create CommentOnThread object correctly', () => {
     const payload = {
-      id:'user-234',
-      username:'John Doe',
-      date:'2024-05-03T09:23:50.928Z',
-      content:'sebuah komen',
+      id: 'user-234',
+      username: 'John Doe',
+      date: '2024-05-03T09:23:50.928Z',
+      content: 'sebuah komen',
       isDelete: false,
-    }
+    };
 
-    const {id, username, date, content}=new CommentOnThread(payload)
+    const {
+      id, username, date, content,
+    } = new CommentOnThread(payload);
 
-    expect(id).toEqual(payload.id)
-    expect(username).toEqual(payload.username)
-    expect(date).toEqual(payload.date)
-    expect(content).toEqual(payload.content)
-  })
+    expect(id).toEqual(payload.id);
+    expect(username).toEqual(payload.username);
+    expect(date).toEqual(payload.date);
+    expect(content).toEqual(payload.content);
+  });
 
   it('should create delete comment object correctly', () => {
     // Arrange
@@ -55,7 +57,9 @@ describe('a CommentOnThread entities', () => {
     };
 
     // Action
-    const {id, username, date, content} = new CommentOnThread(payload);
+    const {
+      id, username, date, content,
+    } = new CommentOnThread(payload);
 
     // Assert
     expect(id).toEqual(payload.id);

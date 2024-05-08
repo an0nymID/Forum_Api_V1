@@ -6,11 +6,13 @@ describe('a DeleteReply entities', () => {
     const payload = {
       id: 'reply-123',
       commentId: 'comment-123',
-      threadId:'thread-123'
+      threadId: 'thread-123',
     };
 
     // Action & Assert
-    expect(() => new DeleteReply(payload)).toThrowError('DELETE_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
+    expect(() => new DeleteReply(payload)).toThrowError(
+      'DELETE_REPLY.NOT_CONTAIN_NEEDED_PROPERTY',
+    );
   });
 
   it('should throw error when payload did not meet data type specification', () => {
@@ -23,7 +25,9 @@ describe('a DeleteReply entities', () => {
     };
 
     // Action & Assert
-    expect(() => new DeleteReply(payload)).toThrowError('DELETE_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    expect(() => new DeleteReply(payload)).toThrowError(
+      'DELETE_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION',
+    );
   });
 
   it('should create DeleteReply object correctly', () => {

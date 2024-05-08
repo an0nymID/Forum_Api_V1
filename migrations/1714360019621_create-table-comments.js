@@ -1,35 +1,33 @@
-/* eslint-disable camelcase */
-
 exports.shorthands = undefined;
 
-exports.up = pgm => {
-  pgm.createTable('comments',{
-    id:{
-      type:'VARCHAR(50)',
-      primaryKey:true
+exports.up = (pgm) => {
+  pgm.createTable('comments', {
+    id: {
+      type: 'VARCHAR(50)',
+      primaryKey: true,
     },
-    content:{
-      type:'TEXT',
-      notNull:true,
+    content: {
+      type: 'TEXT',
+      notNull: true,
     },
-    created_at:{
-      type:'TEXT',
-      notNull:true
+    created_at: {
+      type: 'TEXT',
+      notNull: true,
     },
-    is_delete:{
-      type:'BOOLEAN',
-      notNull:true,
-      default:false
+    is_delete: {
+      type: 'BOOLEAN',
+      notNull: true,
+      default: false,
     },
-    thread_id:{
-      type:'VARCHAR(50)',
-      notNull:true
+    thread_id: {
+      type: 'VARCHAR(50)',
+      notNull: true,
     },
-    owner:{
-      type:'VARCHAR(50)',
-      notNull:true
-    }
-  })
+    owner: {
+      type: 'VARCHAR(50)',
+      notNull: true,
+    },
+  });
 
   pgm.addConstraint(
     'comments',
@@ -43,7 +41,7 @@ exports.up = pgm => {
   );
 };
 
-exports.down = pgm => {
+exports.down = (pgm) => {
   pgm.dropConstraint('comments', 'fk_comments.thread_id_threads.id');
   pgm.dropConstraint('comments', 'fk_comments.owner_users.id');
   pgm.dropTable('comments');

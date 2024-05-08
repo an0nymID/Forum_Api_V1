@@ -1,5 +1,5 @@
 const pool = require('../../database/postgres/pool');
-const AuthServerTestHelper= require('../../../../tests/AuthServerTestHelper')
+const AuthServerTestHelper = require('../../../../tests/AuthServerTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
 const ThreadsTableTestHelper = require('../../../../tests/ThreadsTableTestHelper');
@@ -95,9 +95,8 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
 
       const server = await createServer(container);
 
-      const { accessToken } = await AuthServerTestHelper.getAccessTokenUserIdHelper(
-        { server }
-      );
+      const { accessToken } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const commentId = 'comment-123';
 
       // Action
@@ -185,7 +184,7 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toEqual(
-        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada'
+        'tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada',
       );
     });
 
@@ -225,7 +224,7 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
       expect(responseJson.message).toEqual(
-        'tidak dapat membuat balasan baru karena tipe data tidak sesuai'
+        'tidak dapat membuat balasan baru karena tipe data tidak sesuai',
       );
     });
   });
@@ -234,14 +233,26 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     it('should response 200 and delete reply', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
       const replyId = 'reply-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
+      await RepliesTableTestHelper.addReply({
+        id: replyId,
+        commentId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -281,14 +292,26 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     it('should response 404 when thread not found', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
       const replyId = 'reply-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
+      await RepliesTableTestHelper.addReply({
+        id: replyId,
+        commentId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -309,14 +332,26 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     it('should response 404 when comment not found', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
       const replyId = 'reply-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
+      await RepliesTableTestHelper.addReply({
+        id: replyId,
+        commentId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -337,14 +372,26 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     it('should response 404 when reply not found', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
       const replyId = 'reply-123';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: credentialId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
+      await RepliesTableTestHelper.addReply({
+        id: replyId,
+        commentId,
+        owner: credentialId,
+      });
 
       // Action
       const response = await server.inject({
@@ -365,16 +412,31 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
     it('should response 403 when user not owner', async () => {
       // Arrange
       const server = await createServer(container);
-      const { accessToken, credentialId } = await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
+      const { accessToken, credentialId } =
+        await AuthServerTestHelper.getAccessTokenUserIdHelper({ server });
       const threadId = 'thread-123';
       const commentId = 'comment-123';
       const replyId = 'reply-123';
       const otherUserId = 'user-456';
 
-      await ThreadsTableTestHelper.addThread({ id: threadId, owner: credentialId });
-      await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: credentialId });
-      await UsersTableTestHelper.addUser({ id: otherUserId, username: 'otherUser' });
-      await RepliesTableTestHelper.addReply({ id: replyId, commentId, owner: otherUserId });
+      await ThreadsTableTestHelper.addThread({
+        id: threadId,
+        owner: credentialId,
+      });
+      await CommentsTableTestHelper.addComment({
+        id: commentId,
+        threadId,
+        owner: credentialId,
+      });
+      await UsersTableTestHelper.addUser({
+        id: otherUserId,
+        username: 'otherUser',
+      });
+      await RepliesTableTestHelper.addReply({
+        id: replyId,
+        commentId,
+        owner: otherUserId,
+      });
 
       // Action
       const response = await server.inject({
@@ -389,9 +451,9 @@ describe('/threads/{threadId}/comments/{commentId}/replies endpoint', () => {
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(403);
       expect(responseJson.status).toEqual('fail');
-      expect(responseJson.message).toEqual('Anda tidak boleh mengakses resource ini');
+      expect(responseJson.message).toEqual(
+        'Anda tidak boleh mengakses resource ini',
+      );
     });
   });
-
-  
 });

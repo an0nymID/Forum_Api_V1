@@ -64,13 +64,17 @@ describe('GetThreadDetailUseCase', () => {
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    mockThreadRepository.verifyThreadAvailability = jest.fn()
+    mockThreadRepository.verifyThreadAvailability = jest
+      .fn()
       .mockImplementation(() => Promise.resolve());
-    mockThreadRepository.getThread = jest.fn()
+    mockThreadRepository.getThread = jest
+      .fn()
       .mockImplementation(() => Promise.resolve(mockThread));
-    mockCommentRepository.getCommentsByThreadId = jest.fn()
+    mockCommentRepository.getCommentsByThreadId = jest
+      .fn()
       .mockImplementation(() => Promise.resolve(mockComments));
-    mockReplyRepository.getRepliesByThreadId = jest.fn()
+    mockReplyRepository.getRepliesByThreadId = jest
+      .fn()
       .mockImplementation(() => Promise.resolve(mockReplies));
 
     const getThreadUseCase = new GetThreadUseCase({
@@ -79,21 +83,17 @@ describe('GetThreadDetailUseCase', () => {
       replyRepository: mockReplyRepository,
     });
 
-    const {
-      isDelete: isDeleteCommentA,
-      ...commentA
-    } = mockComments[0];
-    const {
-      isDelete: isDeleteCommentB,
-      ...commentB
-    } = mockComments[1];
+    const { isDelete: isDeleteCommentA, ...commentA } = mockComments[0];
+    const { isDelete: isDeleteCommentB, ...commentB } = mockComments[1];
 
     const {
-      commentId: commentIdReplyA, isDelete: isDeleteReplyA,
+      commentId: commentIdReplyA,
+      isDelete: isDeleteReplyA,
       ...replyA
     } = mockReplies[0];
     const {
-      commentId: commentIdReplyB, isDelete: isDeleteReplyB,
+      commentId: commentIdReplyB,
+      isDelete: isDeleteReplyB,
       ...replyB
     } = mockReplies[1];
 
@@ -102,24 +102,37 @@ describe('GetThreadDetailUseCase', () => {
       { ...commentB, replies: [replyB] },
     ];
 
-    getThreadUseCase._checkDeletedComments = jest.fn()
+    getThreadUseCase._checkDeletedComments = jest
+      .fn()
       .mockImplementation(() => [commentA, commentB]);
-      getThreadUseCase._getRepliesToComments = jest.fn()
+    getThreadUseCase._getRepliesToComments = jest
+      .fn()
       .mockImplementation(() => expectedCommentsToReplies);
 
     // Action
     const threadDetail = await getThreadUseCase.execute(useCasePayload);
 
     // Assert
-    expect(mockThreadRepository.getThread).toBeCalledWith(useCasePayload.threadId);
-    expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(useCasePayload.threadId);
-    expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(useCasePayload.threadId);
-    expect(threadDetail).toEqual(new GetThread({
-      ...mockThread, comments: expectedCommentsToReplies,
-    }));
+    expect(mockThreadRepository.getThread).toBeCalledWith(
+      useCasePayload.threadId,
+    );
+    expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(
+      useCasePayload.threadId,
+    );
+    expect(mockReplyRepository.getRepliesByThreadId).toBeCalledWith(
+      useCasePayload.threadId,
+    );
+    expect(threadDetail).toEqual(
+      new GetThread({
+        ...mockThread,
+        comments: expectedCommentsToReplies,
+      }),
+    );
     expect(getThreadUseCase._checkDeletedComments).toBeCalledWith(mockComments);
-    expect(getThreadUseCase._getRepliesToComments)
-      .toBeCalledWith([commentA, commentB], mockReplies);
+    expect(getThreadUseCase._getRepliesToComments).toBeCalledWith(
+      [commentA, commentB],
+      mockReplies,
+    );
   });
 
   it('should operate the branching in _checkDeletedComments function', async () => {
@@ -142,18 +155,17 @@ describe('GetThreadDetailUseCase', () => {
       }),
     ];
 
-    const {
-      isDelete: isDeleteCommentA,
-      ...commentA
-    } = mockComments[0];
-    const {
-      isDelete: isDeleteCommentB,
-      ...commentB
-    } = mockComments[1];
-    const getThreadUseCase = new GetThreadUseCase(
-      { threadRepository: {}, commentRepository: {}, replyRepository: {} },
+    const { isDelete: isDeleteCommentA, ...commentA } = mockComments[0];
+    const { isDelete: isDeleteCommentB, ...commentB } = mockComments[1];
+    const getThreadUseCase = new GetThreadUseCase({
+      threadRepository: {},
+      commentRepository: {},
+      replyRepository: {},
+    });
+    const spyCheckDeletedComments = jest.spyOn(
+      getThreadUseCase,
+      '_checkDeletedComments',
     );
-    const spyCheckDeletedComments = jest.spyOn(getThreadUseCase, '_checkDeletedComments');
 
     // Action
     getThreadUseCase._checkDeletedComments(mockComments);
@@ -204,25 +216,35 @@ describe('GetThreadDetailUseCase', () => {
       }),
     ];
 
-    const getThreadUseCase = new GetThreadUseCase(
-      { threadRepository: {}, commentRepository: {}, replyRepository: {} },
-    );
+    const getThreadUseCase = new GetThreadUseCase({
+      threadRepository: {},
+      commentRepository: {},
+      replyRepository: {},
+    });
 
     const {
-      commentId: commentIdReplyA, isDelete: isDeleteReplyA,
+      commentId: commentIdReplyA,
+      isDelete: isDeleteReplyA,
       ...replyA
     } = mockReplies[0];
     const {
-      commentId: commentIdReplyB, isDelete: isDeleteReplyB,
+      commentId: commentIdReplyB,
+      isDelete: isDeleteReplyB,
       ...replyB
     } = mockReplies[1];
 
     const expectedCommentsToReplies = [
       { ...mockComments[0], replies: [{ ...replyA }] },
-      { ...mockComments[1], replies: [{ ...replyB, content: '**balasan telah dihapus**' }] },
+      {
+        ...mockComments[1],
+        replies: [{ ...replyB, content: '**balasan telah dihapus**' }],
+      },
     ];
 
-    const spyGetRepliesToComments = jest.spyOn(getThreadUseCase, '_getRepliesToComments');
+    const spyGetRepliesToComments = jest.spyOn(
+      getThreadUseCase,
+      '_getRepliesToComments',
+    );
 
     // Action
     getThreadUseCase._getRepliesToComments(mockComments, mockReplies);

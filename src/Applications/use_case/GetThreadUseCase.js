@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 class GetThreadUseCase {
   constructor({ threadRepository, commentRepository, replyRepository }) {
     this._threadRepository = threadRepository;
@@ -9,11 +10,18 @@ class GetThreadUseCase {
     const { threadId } = useCasePayload;
     await this._threadRepository.verifyThreadAvailability(threadId);
     const thread = await this._threadRepository.getThread(threadId);
-    thread.comments = await this._commentRepository.getCommentsByThreadId(threadId);
-    const threadReplies = await this._replyRepository.getRepliesByThreadId(threadId);
+    thread.comments = await this._commentRepository.getCommentsByThreadId(
+      threadId,
+    );
+    const threadReplies = await this._replyRepository.getRepliesByThreadId(
+      threadId,
+    );
 
     thread.comments = this._checkDeletedComments(thread.comments);
-    thread.comments = this._getRepliesToComments(thread.comments, threadReplies);
+    thread.comments = this._getRepliesToComments(
+      thread.comments,
+      threadReplies,
+    );
 
     return thread;
   }

@@ -6,7 +6,7 @@ class PostedThread {
 
     this.id = id;
     this.title = title;
-    this.owner= owner;
+    this.owner = owner;
   }
 
   _verifyPayload({ id, title, owner }) {
@@ -14,10 +14,14 @@ class PostedThread {
       throw new Error('POSTED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
-    if (typeof id !== 'string' || typeof title !== 'string' || typeof owner !== 'string') {
+    if (
+      typeof id !== 'string'
+      || typeof title !== 'string'
+      || typeof owner !== 'string'
+    ) {
       throw new Error('POSTED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
   }
 }
 
-module.exports=PostedThread
+module.exports = PostedThread;

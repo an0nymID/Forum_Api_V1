@@ -2,7 +2,7 @@ const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const PostedComment = require('../../Domains/comments/entities/PostedComment');
 const CommentRepository = require('../../Domains/comments/CommentRepository');
-const CommentOnThread = require('../../Domains/comments/entities/CommentOnThread')
+const CommentOnThread = require('../../Domains/comments/entities/CommentOnThread');
 
 class CommentRepositoryPostgres extends CommentRepository {
   constructor(pool, idGenerator) {
@@ -19,7 +19,7 @@ class CommentRepositoryPostgres extends CommentRepository {
 
     const query = {
       text: 'INSERT INTO comments (id, content, created_at, thread_id, owner) VALUES($1, $2, $3, $4, $5) RETURNING id, content, owner',
-      values: [id, content, date, threadId, owner, ],
+      values: [id, content, date, threadId, owner],
     };
 
     const { rows } = await this._pool.query(query);
@@ -75,11 +75,14 @@ class CommentRepositoryPostgres extends CommentRepository {
 
     const result = await this._pool.query(query);
 
-    return result.rows.map((item) => new CommentOnThread({
-      ...item, date:item.created_at, isDelete: item.is_delete,
-    }));
+    return result.rows.map(
+      (item) => new CommentOnThread({
+        ...item,
+        date: item.created_at,
+        isDelete: item.is_delete,
+      }),
+    );
   }
-
 }
 
 module.exports = CommentRepositoryPostgres;

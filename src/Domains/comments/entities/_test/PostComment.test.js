@@ -9,7 +9,7 @@ describe('a PostComment entities', () => {
 
     // Action & Assert
     expect(() => new PostComment(payload)).toThrowError(
-      'POST_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY'
+      'POST_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY',
     );
   });
 
@@ -23,7 +23,7 @@ describe('a PostComment entities', () => {
 
     // Action & Assert
     expect(() => new PostComment(payload)).toThrowError(
-      'POST_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION'
+      'POST_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 

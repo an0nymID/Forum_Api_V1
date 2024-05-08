@@ -4,7 +4,6 @@ const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const ReplyOnComment = require('../../Domains/replies/entities/ReplyOnComment');
 
-
 class ReplyRepositoryPostgres extends ReplyRepository {
   constructor(pool, idGenerator) {
     super();
